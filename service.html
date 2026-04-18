@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>サービス内容 | Works Ami</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.svc-list{background:var(--bg)}
+.svc-item{display:grid;gap:24px;padding-bottom:48px;margin-bottom:48px;border-bottom:1px solid var(--border)}
+.svc-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.svc-item-img{width:100%;aspect-ratio:3/2;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);position:relative}
+.svc-item-img img{width:100%;height:100%;object-fit:cover}
+.svc-item-num{position:absolute;top:-10px;left:-6px;z-index:2;background:var(--blue);color:var(--white);width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Shippori Mincho',serif;font-size:1.1rem;font-weight:600;box-shadow:0 4px 12px rgba(74,115,156,.3)}
+.svc-item-text .section-label{margin-bottom:4px}
+.svc-item-text h3{font-family:'Zen Maru Gothic',sans-serif;font-size:1.15rem;font-weight:500;margin-bottom:12px}
+.svc-item-text>p{font-size:.95rem;color:var(--text-mid);line-height:2.1;font-weight:300;margin-bottom:20px}
+.flow{background:var(--bg-warm)}
+.flow-steps{display:grid;gap:20px}
+.flow-step{display:flex;gap:16px;align-items:flex-start;background:var(--white);border-radius:var(--radius);padding:24px 20px;border:1px solid var(--border)}
+.flow-num{width:48px;height:48px;border-radius:50%;flex-shrink:0;background:var(--blue-pale);border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Shippori Mincho',serif;font-size:1.05rem;font-weight:600;color:var(--blue-deep)}
+.flow-step h4{font-family:'Zen Maru Gothic',sans-serif;font-size:.95rem;font-weight:600;margin-bottom:4px}
+.flow-step p{font-size:.85rem;color:var(--text-light);line-height:1.8}
+.pricing{background:var(--bg)}
+.price-card{background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--border);max-width:460px;margin:0 auto}
+.price-header{background:linear-gradient(135deg,var(--blue),var(--blue-deep));padding:22px;text-align:center;font-family:'Zen Maru Gothic',sans-serif;font-size:1rem;font-weight:500;color:var(--white)}
+.price-body{padding:32px 24px;text-align:center}
+.price-main{display:flex;align-items:baseline;justify-content:center;gap:4px;margin-bottom:4px}
+.price-num{font-family:'Shippori Mincho',serif;font-size:3rem;font-weight:600;color:var(--blue-deep);line-height:1}
+.price-unit{font-size:.92rem;color:var(--text-light)}
+.price-tax{font-size:.85rem;color:var(--text-light);margin-bottom:20px}
+.price-extra{display:inline-block;background:var(--blue-pale);padding:12px 22px;border-radius:12px;font-size:.92rem;margin-bottom:20px}
+.price-note{font-size:.82rem;color:var(--text-light);line-height:1.9;border-top:1px solid var(--border);padding-top:16px}
+@media(min-width:600px){.flow-steps{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){.svc-item{grid-template-columns:1fr 1.2fr;gap:48px;align-items:center}.svc-item:nth-child(even){direction:rtl}.svc-item:nth-child(even)>*{direction:ltr}.flow-steps{grid-template-columns:repeat(4,1fr)}.flow-step{flex-direction:column;text-align:center;align-items:center}}
+</style>
+</head>
+<body>
+<header class="header" id="header"><div class="header-inner"><a href="index.html" class="logo"><em>/</em>Works Ami</a><nav class="nav-desktop"><a href="index.html">ホーム</a><a href="about.html">事業概要</a><a href="service.html" class="active">サービス</a><a href="contact.html" class="nav-cta">お問い合わせ</a></nav><button class="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button></div></header>
+<div class="mobile-nav"><a href="index.html">ホーム</a><a href="about.html">事業概要</a><a href="service.html" class="active">サービス内容</a><a href="service-shopping.html">買い物代行</a><a href="service-housework.html">家事代行・家事手伝い</a><a href="service-outing.html">外出・余暇の付添</a><a href="service-hospital.html">通院付添・院内介助</a><a href="contact.html">お問い合わせ</a></div>
+
+<section class="page-hero"><div class="container"><div class="section-line centered rv"></div><div class="section-label text-center rv">Service</div><h1 class="section-heading centered rv">サービス内容</h1><p class="page-hero-desc rv">ご利用者さまの暮らしに合わせた、幅広いサービスをご用意しています。</p></div></section>
+
+<section class="svc-list"><div class="container">
+  <div class="svc-item rv"><div style="position:relative"><div class="svc-item-img"><img src="img/shopping.svg" alt="買い物代行"></div><div class="svc-item-num">01</div></div><div class="svc-item-text"><div class="section-label">Shopping</div><h3>買い物代行</h3><p>日々のお買い物をスタッフが代わりにお引き受けします。スーパーでの食料品から日用品、お薬の受け取りまで、ご要望に合わせて丁寧に対応いたします。</p><a href="service-shopping.html" class="btn btn-outline btn-sm">詳しく見る →</a></div></div>
+  <div class="svc-item rv"><div style="position:relative"><div class="svc-item-img"><img src="img/housework.svg" alt="家事代行"></div><div class="svc-item-num">02</div></div><div class="svc-item-text"><div class="section-label">Housekeeping</div><h3>家事代行・家事手伝い</h3><p>掃除、洗濯、料理、片付けなど日々の家事をサポートします。「全部お任せ」から「一緒にやりたい」まで、ご希望のスタイルでお手伝いします。</p><a href="service-housework.html" class="btn btn-outline btn-sm">詳しく見る →</a></div></div>
+  <div class="svc-item rv"><div style="position:relative"><div class="svc-item-img"><img src="img/outing.svg" alt="外出付添"></div><div class="svc-item-num">03</div></div><div class="svc-item-text"><div class="section-label">Outing</div><h3>外出・余暇の付添</h3><p>お散歩、趣味の外出、友人との会食など、日常のお出かけを安全で楽しいものに。一人では不安な外出も、スタッフが一緒だから安心です。</p><a href="service-outing.html" class="btn btn-outline btn-sm">詳しく見る →</a></div></div>
+  <div class="svc-item rv"><div style="position:relative"><div class="svc-item-img"><img src="img/hospital.svg" alt="通院付添"></div><div class="svc-item-num">04</div></div><div class="svc-item-text"><div class="section-label">Hospital</div><h3>通院付添・院内介助</h3><p>病院への移動から受付、診察の待ち時間、会計まで、通院に関わるすべてをサポート。院内での移動介助もお任せください。</p><a href="service-hospital.html" class="btn btn-outline btn-sm">詳しく見る →</a></div></div>
+</div></section>
+
+<section class="flow"><div class="container text-center"><div class="section-line centered rv"></div><div class="section-label text-center rv">Flow</div><h2 class="section-heading centered rv">ご利用の流れ</h2>
+  <div class="flow-steps">
+    <div class="flow-step rv rv-d1"><div class="flow-num">1</div><div><h4>お問い合わせ</h4><p>お電話またはフォームからお気軽にご連絡ください。</p></div></div>
+    <div class="flow-step rv rv-d2"><div class="flow-num">2</div><div><h4>ヒアリング</h4><p>ご要望やご状況を丁寧にお伺いします。</p></div></div>
+    <div class="flow-step rv rv-d3"><div class="flow-num">3</div><div><h4>プラン作成</h4><p>最適なサポートプランをご提案します。</p></div></div>
+    <div class="flow-step rv rv-d4"><div class="flow-num">4</div><div><h4>サービス開始</h4><p>ご納得いただけたらサービスを開始します。</p></div></div>
+  </div>
+</div></section>
+
+<section class="pricing"><div class="container text-center"><div class="section-line centered rv"></div><div class="section-label text-center rv">Price</div><h2 class="section-heading centered rv">ご利用料金</h2>
+  <div class="price-card rv"><div class="price-header">基本料金</div><div class="price-body"><div class="price-main"><span class="price-num" data-cms="pricing.price">3,200</span><span class="price-unit" data-cms="pricing.unit">円/時間</span></div><p class="price-tax">（税込3,520円）</p><div class="price-extra">＋880円（交通費）</div><p class="price-note">※介護保険は適用されません。自費サービスとなります。<br>※最低利用時間は1時間からとなります。</p></div></div>
+</div></section>
+
+<div class="cta-band"><h2 class="rv">サービスについてのご質問はお気軽に</h2><p class="rv">初回のご相談は無料です。</p><a href="contact.html" class="btn btn-white rv">お問い合わせはこちら</a></div>
+
+<footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><div class="logo"><em>/</em>Works Ami</div><p>あなたに寄り添う、暮らしのパートナー。</p></div><div class="footer-links"><h4>Pages</h4><a href="index.html">ホーム</a><a href="about.html">事業概要</a><a href="service.html">サービス内容</a><a href="contact.html">お問い合わせ</a></div><div class="footer-links"><h4>Service</h4><a href="service-shopping.html">買い物代行</a><a href="service-housework.html">家事代行</a><a href="service-outing.html">外出付添</a><a href="service-hospital.html">通院付添</a></div></div><p class="footer-copy">&copy; 2026 Works Ami. All Rights Reserved.</p></div></footer>
+<script src="main.js"></script>
+<script src="cms-loader.js"></script>
+</body>
+</html>

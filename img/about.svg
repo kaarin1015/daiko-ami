@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><linearGradient id="abg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#eef4f9"/><stop offset="100%" stop-color="#f7ece7"/></linearGradient></defs>
+  <rect width="800" height="600" fill="url(#abg)"/>
+  <circle cx="400" cy="300" r="200" fill="#d6e4f0" opacity=".2"/>
+  <circle cx="250" cy="450" r="100" fill="#f7ece7" opacity=".3"/>
+  <!-- Staff figure -->
+  <g transform="translate(280,160)">
+    <circle cx="60" cy="40" r="35" fill="#f5d5c8"/>
+    <path d="M20,90 Q20,75 60,75 Q100,75 100,90 L110,260 Q110,280 60,280 Q10,280 10,260Z" fill="#4a739c" opacity=".8"/>
+    <rect x="35" y="85" width="50" height="8" rx="4" fill="#fff" opacity=".6"/>
+    <!-- smile -->
+    <path d="M48,48 Q60,58 72,48" stroke="#c97b5e" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="48" cy="38" r="3" fill="#506070"/><circle cx="72" cy="38" r="3" fill="#506070"/>
+  </g>
+  <!-- Elder figure -->
+  <g transform="translate(440,180)">
+    <circle cx="50" cy="40" r="32" fill="#e8c4b8"/>
+    <path d="M15,85 Q15,72 50,72 Q85,72 85,85 L92,240 Q92,258 50,258 Q8,258 8,240Z" fill="#7fa3c7" opacity=".7"/>
+    <path d="M38,48 Q50,56 62,48" stroke="#c97b5e" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="40" cy="38" r="2.5" fill="#506070"/><circle cx="60" cy="38" r="2.5" fill="#506070"/>
+    <!-- walking stick -->
+    <line x1="92" y1="180" x2="105" y2="260" stroke="#8899a8" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <!-- Connecting heart -->
+  <g transform="translate(370,300)" opacity=".2">
+    <path d="M20,12 Q20,0 32,0 Q44,0 44,12 Q44,0 56,0 Q68,0 68,12 Q68,28 44,44 Q20,28 20,12Z" fill="#c97b5e"/>
+  </g>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#eef4f9"/>
+  <circle cx="400" cy="300" r="220" fill="#d6e4f0" opacity=".15"/>
+  <!-- Hospital building -->
+  <g transform="translate(250,100)">
+    <rect x="0" y="60" width="300" height="340" rx="8" fill="#fff" opacity=".8"/>
+    <rect x="0" y="60" width="300" height="340" rx="8" stroke="#4a739c" stroke-width="1" fill="none" opacity=".2"/>
+    <!-- Cross -->
+    <rect x="125" y="0" width="50" height="50" rx="6" fill="#4a739c" opacity=".15"/>
+    <line x1="150" y1="10" x2="150" y2="40" stroke="#4a739c" stroke-width="4" stroke-linecap="round" opacity=".4"/>
+    <line x1="135" y1="25" x2="165" y2="25" stroke="#4a739c" stroke-width="4" stroke-linecap="round" opacity=".4"/>
+    <!-- Windows -->
+    <rect x="30" y="100" width="50" height="40" rx="4" fill="#d6e4f0" opacity=".5"/>
+    <rect x="110" y="100" width="50" height="40" rx="4" fill="#d6e4f0" opacity=".5"/>
+    <rect x="220" y="100" width="50" height="40" rx="4" fill="#d6e4f0" opacity=".5"/>
+    <rect x="30" y="180" width="50" height="40" rx="4" fill="#d6e4f0" opacity=".5"/>
+    <rect x="110" y="180" width="50" height="40" rx="4" fill="#d6e4f0" opacity=".5"/>
+    <rect x="220" y="180" width="50" height="40" rx="4" fill="#d6e4f0" opacity=".5"/>
+    <!-- Door -->
+    <rect x="115" y="300" width="70" height="100" rx="6" fill="#4a739c" opacity=".12"/>
+  </g>
+  <!-- Person with helper -->
+  <g transform="translate(200,400)" opacity=".6">
+    <circle cx="30" cy="0" r="16" fill="#f5d5c8"/>
+    <rect x="15" y="18" width="30" height="55" rx="8" fill="#7fa3c7" opacity=".6"/>
+  </g>
+  <g transform="translate(260,405)" opacity=".6">
+    <circle cx="25" cy="0" r="14" fill="#e8c4b8"/>
+    <rect x="12" y="16" width="26" height="48" rx="7" fill="#c97b5e" opacity=".3"/>
+  </g>
+</svg>

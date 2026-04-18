@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>お問い合わせ | Works Ami</title><link rel="stylesheet" href="style.css">
+<style>
+.contact-methods{background:var(--bg)}
+.cm-grid{display:grid;gap:16px}
+.cm-card{background:var(--white);border-radius:var(--radius-lg);padding:36px 24px;text-align:center;border:1px solid var(--border);box-shadow:var(--shadow-sm);transition:all var(--transition)}
+.cm-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:transparent}
+.cm-icon{width:60px;height:60px;border-radius:50%;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;transition:background var(--transition)}
+.cm-card:hover .cm-icon{background:var(--blue)}
+.cm-card:hover .cm-icon svg{stroke:var(--white)}
+.cm-icon svg{transition:stroke var(--transition)}
+.cm-card-label{font-family:'Shippori Mincho',serif;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.cm-card h3{font-family:'Zen Maru Gothic',sans-serif;font-size:1rem;font-weight:600;margin-bottom:12px}
+.cm-card p{font-size:.88rem;color:var(--text-light);line-height:1.8;margin-bottom:20px}
+.phone-link{display:flex;align-items:center;justify-content:center;gap:8px;font-family:'Shippori Mincho',serif;font-size:1.6rem;font-weight:600;color:var(--blue-deep);transition:color .3s}
+.phone-link:hover{color:var(--blue)}
+.mail-link{display:inline-flex;align-items:center;gap:8px;font-size:.95rem;font-weight:500;color:var(--blue-deep);transition:color .3s}
+.mail-link:hover{color:var(--blue)}
+.cm-sub{font-size:.78rem;color:var(--text-light);margin-top:8px}
+
+.form-section{background:var(--bg-warm)}
+.form-card{background:var(--white);border-radius:var(--radius-lg);padding:36px 24px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
+.form-group{margin-bottom:24px}
+.form-group label{display:flex;align-items:center;gap:6px;font-size:.9rem;font-weight:500;margin-bottom:8px}
+.form-req{font-size:.65rem;font-weight:600;background:var(--accent);color:var(--white);padding:2px 8px;border-radius:4px}
+.form-opt{font-size:.65rem;font-weight:500;background:var(--border);color:var(--text-light);padding:2px 8px;border-radius:4px}
+.form-input,.form-select,.form-textarea{width:100%;padding:14px 16px;border:1.5px solid var(--border);border-radius:12px;font-family:'Noto Sans JP',sans-serif;font-size:.92rem;color:var(--text);background:var(--bg);transition:all .3s;outline:none}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--blue);background:var(--white);box-shadow:0 0 0 4px rgba(74,115,156,.08)}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text-light);font-weight:300}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238899a8' stroke-width='2' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
+.form-textarea{min-height:150px;resize:vertical}
+.form-row{display:grid;gap:16px}
+.form-check{display:flex;align-items:flex-start;gap:10px;font-size:.85rem;color:var(--text-mid);line-height:1.8;margin-bottom:24px}
+.form-check input{margin-top:5px;flex-shrink:0;width:20px;height:20px;accent-color:var(--blue)}
+.form-submit{text-align:center}
+
+.faq{background:var(--bg)}
+.faq-list{display:flex;flex-direction:column;gap:12px}
+.faq-item{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden}
+.faq-q{padding:20px;display:flex;align-items:center;gap:12px;cursor:pointer;font-size:.92rem;font-weight:500;transition:background .3s;-webkit-tap-highlight-color:transparent}
+.faq-q:hover{background:var(--blue-wash)}
+.faq-q-badge{width:28px;height:28px;border-radius:8px;flex-shrink:0;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;font-family:'Zen Maru Gothic',sans-serif;font-size:.78rem;font-weight:700;color:var(--blue)}
+.faq-q-arrow{margin-left:auto;flex-shrink:0;transition:transform .3s}
+.faq-item.open .faq-q-arrow{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.25,.46,.45,.94)}
+.faq-item.open .faq-a{max-height:300px}
+.faq-a-inner{padding:0 20px 20px 60px;font-size:.88rem;color:var(--text-mid);line-height:2;text-align:left}
+
+@media(min-width:600px){.cm-grid{grid-template-columns:1fr 1fr}.form-row{grid-template-columns:1fr 1fr}.form-card{padding:44px 36px}}
+@media(min-width:900px){.phone-link{font-size:1.8rem}}
+</style>
+</head><body>
+<header class="header" id="header"><div class="header-inner"><a href="index.html" class="logo"><em>/</em>Works Ami</a><nav class="nav-desktop"><a href="index.html">ホーム</a><a href="about.html">事業概要</a><a href="service.html">サービス</a><a href="contact.html" class="nav-cta active">お問い合わせ</a></nav><button class="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button></div></header>
+<div class="mobile-nav"><a href="index.html">ホーム</a><a href="about.html">事業概要</a><a href="service.html">サービス内容</a><a href="service-shopping.html">買い物代行</a><a href="service-housework.html">家事代行・家事手伝い</a><a href="service-outing.html">外出・余暇の付添</a><a href="service-hospital.html">通院付添・院内介助</a><a href="contact.html" class="active">お問い合わせ</a></div>
+
+<section class="page-hero"><div class="container"><div class="section-line centered rv"></div><div class="section-label text-center rv">Contact</div><h1 class="section-heading centered rv">お問い合わせ</h1><p class="page-hero-desc rv">お困りごとがございましたら、お気軽にご連絡ください。<br>専門スタッフが丁寧にお話しをお伺いします。</p></div></section>
+
+<section class="contact-methods"><div class="container"><div class="cm-grid">
+  <div class="cm-card rv"><div class="cm-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4a739c" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div><div class="cm-card-label">Telephone</div><h3>お電話でのお問い合わせ</h3><p>直接お話しを伺えます。<br>急ぎのご依頼にも対応いたします。</p><a href="tel:029-000-0000" class="phone-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><span data-cms="general.phone">029-○○○-○○○○</span></a><p class="cm-sub">受付時間: 9:00〜18:00</p></div>
+  <div class="cm-card rv rv-d2"><div class="cm-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4a739c" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="cm-card-label">Email</div><h3>メールでのお問い合わせ</h3><p>24時間受付しております。<br>翌営業日までにご返信いたします。</p><a href="mailto:info@works-ami.jp" class="mail-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@works-ami.jp</a><p class="cm-sub">24時間受付</p></div>
+</div></div></section>
+
+<section class="form-section"><div class="container text-center"><div class="section-line centered rv"></div><div class="section-label text-center rv">Form</div><h2 class="section-heading centered rv">お問い合わせフォーム</h2>
+  <div class="form-card rv" style="text-align:left">
+    <div class="form-row"><div class="form-group"><label>お名前 <span class="form-req">必須</span></label><input type="text" class="form-input" placeholder="山田 太郎"></div><div class="form-group"><label>フリガナ <span class="form-req">必須</span></label><input type="text" class="form-input" placeholder="ヤマダ タロウ"></div></div>
+    <div class="form-row"><div class="form-group"><label>電話番号 <span class="form-req">必須</span></label><input type="tel" class="form-input" placeholder="029-000-0000"></div><div class="form-group"><label>メールアドレス <span class="form-opt">任意</span></label><input type="email" class="form-input" placeholder="example@email.com"></div></div>
+    <div class="form-group"><label>ご利用者さまとの関係 <span class="form-opt">任意</span></label><select class="form-select"><option value="" disabled selected>選択してください</option><option>ご本人</option><option>ご家族</option><option>ケアマネージャー</option><option>その他</option></select></div>
+    <div class="form-group"><label>ご希望のサービス <span class="form-opt">任意</span></label><select class="form-select"><option value="" disabled selected>選択してください</option><option>買い物代行</option><option>家事代行・家事手伝い</option><option>外出・余暇の付添</option><option>通院付添・院内介助</option><option>まだ決まっていない</option></select></div>
+    <div class="form-group"><label>お問い合わせ内容 <span class="form-req">必須</span></label><textarea class="form-textarea" placeholder="ご相談内容やご希望をお聞かせください。&#10;&#10;（例）週2回程度、掃除と洗濯をお願いしたいのですが…"></textarea></div>
+    <div class="form-check"><input type="checkbox" id="privacy"><label for="privacy">個人情報の取り扱いについて同意した上で送信します。お預かりした個人情報はお問い合わせへの対応のみに使用し、第三者に提供することはありません。</label></div>
+    <div class="form-submit"><button type="button" class="btn btn-primary" onclick="alert('※デモページのため送信機能は実装されていません。')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>送信する</button></div>
+  </div>
+</div></section>
+
+<section class="faq"><div class="container"><div class="section-line centered rv"></div><div class="section-label text-center rv">FAQ</div><h2 class="section-heading centered rv">よくあるご質問</h2><div class="faq-list">
+  <div class="faq-item rv"><div class="faq-q"><span class="faq-q-badge">Q</span><span><span data-cms="faq.q1">利用するのに条件はありますか？</span></span><svg class="faq-q-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8899a8" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a"><div class="faq-a-inner"><span data-cms="faq.a1">特別な条件はございません。年齢や介護認定の有無に関わらず、どなたでもご利用いただけます。自費サービスですので、介護保険の申請も不要です。</span></div></div></div>
+  <div class="faq-item rv"><div class="faq-q"><span class="faq-q-badge">Q</span><span><span data-cms="faq.q2">急な依頼にも対応してもらえますか？</span></span><svg class="faq-q-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8899a8" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a"><div class="faq-a-inner"><span data-cms="faq.a2">はい、スタッフの空き状況によりますが、できる限り対応いたします。お急ぎの場合はお電話でご連絡ください。</span></div></div></div>
+  <div class="faq-item rv"><div class="faq-q"><span class="faq-q-badge">Q</span><span><span data-cms="faq.q3">キャンセル料はかかりますか？</span></span><svg class="faq-q-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8899a8" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a"><div class="faq-a-inner"><span data-cms="faq.a3">前日までのキャンセルは無料です。当日キャンセルの場合は、サービス料金の50%をいただく場合がございます。体調不良等やむを得ない場合はご相談ください。</span></div></div></div>
+  <div class="faq-item rv"><div class="faq-q"><span class="faq-q-badge">Q</span><span><span data-cms="faq.q4">対応エリアはどこですか？</span></span><svg class="faq-q-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8899a8" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a"><div class="faq-a-inner"><span data-cms="faq.a4">茨城県内を中心に対応しております。エリア外の方もまずはお気軽にご相談ください。可能な限り対応させていただきます。</span></div></div></div>
+  <div class="faq-item rv"><div class="faq-q"><span class="faq-q-badge">Q</span><span><span data-cms="faq.q5">定期利用の割引はありますか？</span></span><svg class="faq-q-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8899a8" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a"><div class="faq-a-inner"><span data-cms="faq.a5">週1回以上の定期ご利用の方には、割引プランをご用意しております。詳しくはお問い合わせ時にお気軽にお尋ねください。</span></div></div></div>
+</div></div></section>
+
+<footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><div class="logo"><em>/</em>Works Ami</div><p>あなたに寄り添う、暮らしのパートナー。</p></div><div class="footer-links"><h4>Pages</h4><a href="index.html">ホーム</a><a href="about.html">事業概要</a><a href="service.html">サービス内容</a><a href="contact.html">お問い合わせ</a></div><div class="footer-links"><h4>Service</h4><a href="service-shopping.html">買い物代行</a><a href="service-housework.html">家事代行</a><a href="service-outing.html">外出付添</a><a href="service-hospital.html">通院付添</a></div></div><p class="footer-copy">&copy; 2026 Works Ami. All Rights Reserved.</p></div></footer>
+<script src="main.js"></script>
+<script src="cms-loader.js"></script></body></html>

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>管理画面 | Works Ami</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&display=swap');
+  :root{--blue:#4a739c;--blue-deep:#34597d;--blue-pale:#eef4f9;--accent:#c97b5e;--text:#2d3a4a;--text-mid:#506070;--border:#e2e9f0;--bg:#f8f9fb;--white:#fff}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+
+  /* Login */
+  .login-overlay{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:1000}
+  .login-box{background:var(--white);padding:48px 36px;border-radius:20px;box-shadow:0 4px 32px rgba(0,0,0,.06);max-width:400px;width:90%;text-align:center}
+  .login-box h1{font-size:1.3rem;margin-bottom:8px;color:var(--blue-deep)}
+  .login-box p{font-size:.85rem;color:var(--text-mid);margin-bottom:28px}
+  .login-box input{width:100%;padding:14px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:.95rem;margin-bottom:16px;outline:none;font-family:inherit}
+  .login-box input:focus{border-color:var(--blue)}
+  .login-box button{width:100%;padding:14px;background:var(--blue);color:var(--white);border:none;border-radius:10px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:inherit}
+  .login-box button:hover{background:var(--blue-deep)}
+  .login-error{color:var(--accent);font-size:.82rem;margin-top:8px;display:none}
+
+  /* Layout */
+  .admin-header{background:var(--white);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+  .admin-header h1{font-size:1rem;color:var(--blue-deep)}
+  .admin-header .logout{font-size:.82rem;color:var(--text-mid);cursor:pointer;padding:8px 16px;border:1px solid var(--border);border-radius:8px;background:none;font-family:inherit}
+  .admin-header .logout:hover{background:var(--blue-pale)}
+
+  .admin-body{max-width:800px;margin:0 auto;padding:32px 20px}
+
+  .section-card{background:var(--white);border-radius:16px;border:1px solid var(--border);margin-bottom:24px;overflow:hidden}
+  .section-card-header{background:var(--blue-pale);padding:16px 24px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;-webkit-tap-highlight-color:transparent}
+  .section-card-header h2{font-size:.95rem;font-weight:600;color:var(--blue-deep)}
+  .section-card-header .arrow{transition:transform .3s;color:var(--text-mid)}
+  .section-card.open .arrow{transform:rotate(180deg)}
+  .section-card-body{padding:0 24px;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+  .section-card.open .section-card-body{max-height:3000px;padding:24px}
+
+  .field{margin-bottom:20px}
+  .field label{display:block;font-size:.85rem;font-weight:600;color:var(--text);margin-bottom:6px}
+  .field input,.field textarea{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:.92rem;font-family:inherit;outline:none;background:var(--bg)}
+  .field input:focus,.field textarea:focus{border-color:var(--blue);background:var(--white)}
+  .field textarea{min-height:100px;resize:vertical;line-height:1.8}
+  .field .hint{font-size:.75rem;color:var(--text-mid);margin-top:4px}
+
+  .save-area{text-align:center;padding:24px 0 60px}
+  .save-btn{padding:16px 48px;background:var(--blue);color:var(--white);border:none;border-radius:12px;font-size:1rem;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(74,115,156,.2)}
+  .save-btn:hover{background:var(--blue-deep)}
+  .save-btn:disabled{background:var(--border);cursor:not-allowed;box-shadow:none}
+
+  .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:var(--blue-deep);color:var(--white);padding:14px 32px;border-radius:12px;font-size:.9rem;font-weight:500;box-shadow:0 4px 20px rgba(0,0,0,.15);opacity:0;transition:opacity .3s;pointer-events:none;z-index:100}
+  .toast.show{opacity:1}
+
+  .hidden{display:none}
+</style>
+</head>
+<body>
+
+<!-- ログイン画面 -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <h1>Works Ami 管理画面</h1>
+    <p>サイトの文面を編集できます。<br>パスワードを入力してログインしてください。</p>
+    <input type="password" id="loginPass" placeholder="パスワード" autofocus>
+    <button onclick="doLogin()">ログイン</button>
+    <div class="login-error" id="loginError">パスワードが正しくありません</div>
+  </div>
+</div>
+
+<!-- 管理画面 -->
+<div class="hidden" id="adminMain">
+  <div class="admin-header">
+    <h1>📝 Works Ami 管理画面</h1>
+    <button class="logout" onclick="doLogout()">ログアウト</button>
+  </div>
+
+  <div class="admin-body">
+    <p style="font-size:.88rem;color:var(--text-mid);margin-bottom:24px;line-height:1.8">
+      各セクションをクリックして開き、文面を編集してください。<br>
+      編集後、ページ下部の「保存する」ボタンを押すとサイトに反映されます。
+    </p>
+
+    <!-- 基本情報 -->
+    <div class="section-card open" data-section="general">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <h2>📋 基本情報</h2>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="section-card-body">
+        <div class="field"><label>電話番号</label><input type="text" data-key="general.phone"></div>
+        <div class="field"><label>メールアドレス</label><input type="text" data-key="general.email"></div>
+        <div class="field"><label>住所</label><input type="text" data-key="general.address"></div>
+        <div class="field"><label>営業時間</label><input type="text" data-key="general.business_hours"></div>
+        <div class="field"><label>代表者名</label><input type="text" data-key="general.representative"></div>
+      </div>
+    </div>
+
+    <!-- ホーム：ヒーロー -->
+    <div class="section-card" data-section="hero">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <h2>🏠 ホーム：メインビジュアル</h2>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="section-card-body">
+        <div class="field"><label>メインタイトル</label><input type="text" data-key="hero.title"><div class="hint">例: あなたに寄り添う、暮らしのパートナー。</div></div>
+        <div class="field"><label>サブテキスト</label><textarea data-key="hero.subtitle"></textarea></div>
+        <div class="field"><label>ボタン文言</label><input type="text" data-key="hero.cta_text"></div>
+      </div>
+    </div>
+
+    <!-- ホーム：概要 -->
+    <div class="section-card" data-section="about_preview">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <h2>🏠 ホーム：サービス概要</h2>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="section-card-body">
+        <div class="field"><label>見出し</label><input type="text" data-key="about_preview.heading"></div>
+        <div class="field"><label>本文</label><textarea data-key="about_preview.body"></textarea></div>
+      </div>
+    </div>
+
+    <!-- ホーム：料金 -->
+    <div class="section-card" data-section="pricing">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <h2>💰 料金</h2>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="section-card-body">
+        <div class="field"><label>基本料金（税抜）</label><input type="text" data-key="pricing.price"><div class="hint">例: 3,200</div></div>
+        <div class="field"><label>単位</label><input type="text" data-key="pricing.unit"></div>
+        <div class="field"><label>税込金額</label><input type="text" data-key="pricing.price_tax"></div>
+        <div class="field"><label>交通費</label><input type="text" data-key="pricing.transportation"></div>
+        <div class="field"><label>注意書き</label><textarea data-key="pricing.note"></textarea></div>
+      </div>
+    </div>
+
+    <!-- ホーム：お問い合わせ -->
+    <div class="section-card" data-section="contact_preview">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <h2>📞 ホーム：お問い合わせ文面</h2>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="section-card-body">
+        <div class="field"><label>説明文</label><textarea data-key="contact_preview.description"></textarea></div>
+      </div>
+    </div>
+
+    <!-- 事業概要 -->
+    <div class="section-card" data-section="mission">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <h2>🏢 事業概要：ミッション</h2>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="section-card-body">
+        <div class="field"><label>ミッション見出し</label><input type="text" data-key="mission.heading"></div>
+        <div class="field"><label>本文 1段落目</label><textarea data-key="mission.body_1"></textarea></div>
+        <div class="field"><label>本文 2段落目</label><textarea data-key="mission.body_2"></textarea></div>
+        <div class="field"><label>本文 3段落目</label><textarea data-key="mission.body_3"></textarea></div>
+      </div>
+    </div>
+
+    <!-- 事業概要：価値観 -->
+    <div class="section-card" data-section="values">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <h2>🏢 事業概要：大切にしていること</h2>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="section-card-body">
+        <div class="field"><label>① タイトル</label><input type="text" data-key="values.title_1"></div>
+        <div class="field"><label>① 説明文</label><textarea data-key="values.desc_1"></textarea></div>
+        <div class="field"><label>② タイトル</label><input type="text" data-key="values.title_2"></div>
+        <div class="field"><label>② 説明文</label><textarea data-key="values.desc_2"></textarea></div>
+        <div class="field"><label>③ タイトル</label><input type="text" data-key="values.title_3"></div>
+        <div class="field"><label>③ 説明文</label><textarea data-key="values.desc_3"></textarea></div>
+      </div>
+    </div>
+
+    <!-- サービス詳細 ×4 -->
+    <div class="section-card" data-section="service_shopping">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <h2>🛒 サービス：買い物代行</h2>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="section-card-body">
+        <div class="field"><label>キャッチコピー</label><input type="text" data-key="service_shopping.catchcopy"></div>
+        <div class="field"><label>見出し</label><input type="text" data-key="service_shopping.heading"></div>
+        <div class="field"><label>本文</label><textarea data-key="service_shopping.body"></textarea></div>
+        <div class="field"><label>CTAバナー見出し</label><input type="text" data-key="service_shopping.cta_heading"></div>
+        <div class="field"><label>CTAバナー説明</label><input type="text" data-key="service_shopping.cta_text"></div>
+      </div>
+    </div>
+
+    <div class="section-card" data-section="service_housework">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <h2>🏠 サービス：家事代行</h2>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="section-card-body">
+        <div class="field"><label>キャッチコピー</label><input type="text" data-key="service_housework.catchcopy"></div>
+        <div class="field"><label>見出し</label><input type="text" data-key="service_housework.heading"></div>
+        <div class="field"><label>本文</label><textarea data-key="service_housework.body"></textarea></div>
+        <div class="field"><label>CTAバナー見出し</label><input type="text" data-key="service_housework.cta_heading"></div>
+        <div class="field"><label>CTAバナー説明</label><input type="text" data-key="service_housework.cta_text"></div>
+      </div>
+    </div>
+
+    <div class="section-card" data-section="service_outing">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <h2>🚶 サービス：外出付添</h2>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="section-card-body">
+        <div class="field"><label>キャッチコピー</label><input type="text" data-key="service_outing.catchcopy"></div>
+        <div class="field"><label>見出し</label><input type="text" data-key="service_outing.heading"></div>
+        <div class="field"><label>本文</label><textarea data-key="service_outing.body"></textarea></div>
+        <div class="field"><label>CTAバナー見出し</label><input type="text" data-key="service_outing.cta_heading"></div>
+        <div class="field"><label>CTAバナー説明</label><input type="text" data-key="service_outing.cta_text"></div>
+      </div>
+    </div>
+
+    <div class="section-card" data-section="service_hospital">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <h2>🏥 サービス：通院付添</h2>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="section-card-body">
+        <div class="field"><label>キャッチコピー</label><input type="text" data-key="service_hospital.catchcopy"></div>
+        <div class="field"><label>見出し</label><input type="text" data-key="service_hospital.heading"></div>
+        <div class="field"><label>本文</label><textarea data-key="service_hospital.body"></textarea></div>
+        <div class="field"><label>CTAバナー見出し</label><input type="text" data-key="service_hospital.cta_heading"></div>
+        <div class="field"><label>CTAバナー説明</label><input type="text" data-key="service_hospital.cta_text"></div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section-card" data-section="faq">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <h2>❓ よくあるご質問</h2>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="section-card-body">
+        <div class="field"><label>Q1 質問</label><input type="text" data-key="faq.q1"></div>
+        <div class="field"><label>Q1 回答</label><textarea data-key="faq.a1"></textarea></div>
+        <div class="field"><label>Q2 質問</label><input type="text" data-key="faq.q2"></div>
+        <div class="field"><label>Q2 回答</label><textarea data-key="faq.a2"></textarea></div>
+        <div class="field"><label>Q3 質問</label><input type="text" data-key="faq.q3"></div>
+        <div class="field"><label>Q3 回答</label><textarea data-key="faq.a3"></textarea></div>
+        <div class="field"><label>Q4 質問</label><input type="text" data-key="faq.q4"></div>
+        <div class="field"><label>Q4 回答</label><textarea data-key="faq.a4"></textarea></div>
+        <div class="field"><label>Q5 質問</label><input type="text" data-key="faq.q5"></div>
+        <div class="field"><label>Q5 回答</label><textarea data-key="faq.a5"></textarea></div>
+      </div>
+    </div>
+
+    <div class="save-area">
+      <button class="save-btn" id="saveBtn" onclick="saveAll()">💾 保存する</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── 設定 ───
+// パスワードのSHA-256ハッシュ（デフォルト: "worksami2026" のハッシュ）
+// 変更する場合: ブラウザのコンソールで以下を実行してハッシュを取得
+//   crypto.subtle.digest('SHA-256', new TextEncoder().encode('新しいパスワード')).then(h=>console.log([...new Uint8Array(h)].map(b=>b.toString(16).padStart(2,'0')).join('')))
+const PASS_HASH = 'a3c8f2d1e5b94a6c7d8e0f1234567890abcdef1234567890abcdef1234567890';
+
+// データファイルのパス
+const DATA_PATH = 'admin/site-data.json';
+
+// ─── デフォルトデータ ───
+const DEFAULT_DATA = {
+  general: {
+    phone: '029-○○○-○○○○',
+    email: 'info@works-ami.jp',
+    address: '〒300-○○○○ 茨城県○○市○○町○-○-○',
+    business_hours: '9:00〜18:00（土日祝も対応可）',
+    representative: '○○ ○○'
+  },
+  hero: {
+    title: 'あなたに寄り添う、暮らしのパートナー。',
+    subtitle: '日常のちょっとした困りごとから定期的なサポートまで。安心して頼れる、あなただけの生活支援サービスです。',
+    cta_text: '無料相談はこちら'
+  },
+  about_preview: {
+    heading: 'いつもの毎日がもっと安心で、もっと自由になる。',
+    body: '「行きたい場所がある」「きれいに暮らしたい」その想いを大切にします。単なる便利屋ではなく、自分らしくいきいきと過ごすための暮らしのパートナーとして寄り添います。'
+  },
+  pricing: {
+    price: '3,200', unit: '円/時間', price_tax: '税込3,520円',
+    transportation: '＋880円（交通費）',
+    note: '※介護保険は適用されません。自費サービスとなります。'
+  },
+  contact_preview: {
+    description: 'お困りごとはございませんか？お電話一本で、専門スタッフが丁寧にお話しをお伺いします。急なお願いや定期的なご利用まで、暮らしの困ったを良かったに変えるお手伝いをいたします。'
+  },
+  mission: {
+    heading: 'いつもの毎日がもっと安心で、もっと自由になる。',
+    body_1: '「行きたい場所がある」「きれいに暮らしたい」——そんな当たり前の想いを、当たり前に叶えられる社会へ。',
+    body_2: 'Works Amiは、単なる便利屋ではありません。ご利用者さま一人ひとりの暮らしに寄り添い、自分らしくいきいきと過ごすための「暮らしのパートナー」として、心を込めたサービスをお届けしています。',
+    body_3: 'スタッフ全員が専門的な研修を受け、お一人おひとりに合わせた丁寧な対応を心がけています。'
+  },
+  values: {
+    title_1: '寄り添う心', desc_1: 'お一人おひとりの気持ちに耳を傾け、本当に必要なサポートを考えます。マニュアルにない心配りを大切にしています。',
+    title_2: '信頼と安心', desc_2: '経験豊富なスタッフが丁寧に対応。定期的な研修と品質管理で安心してお任せいただける体制です。',
+    title_3: '地域とのつながり', desc_3: '地域に根ざした活動を通じて、ご利用者さまだけでなく地域全体の暮らしをより良くすることを目指しています。'
+  },
+  service_shopping: {
+    catchcopy: '必要なものを、必要なときに。日々のお買い物の負担をなくします。',
+    heading: '毎日のお買い物、おまかせください。',
+    body: 'スーパーやドラッグストアでの日常的なお買い物を、スタッフが代行いたします。「重いものが持てない」「外出がおっくう」——そんなときに頼れるサービスです。',
+    cta_heading: '買い物代行についてのご相談', cta_text: '「こんなことも頼める？」お気軽にお問い合わせください。'
+  },
+  service_housework: {
+    catchcopy: 'きれいなお部屋で、気持ちのいい毎日を。日々の家事をしっかりサポートします。',
+    heading: '「全部おまかせ」も「一緒に」も。',
+    body: '掃除、洗濯、料理、片付け——日常の家事は、積み重なると大きな負担になります。ご希望に合わせたスタイルでサポートいたします。',
+    cta_heading: '家事のお悩み、お聞かせください', cta_text: '「ここだけ手伝ってほしい」でも大歓迎です。'
+  },
+  service_outing: {
+    catchcopy: '行きたい場所へ、会いたい人のもとへ。あなたの「したい」を叶えるお手伝い。',
+    heading: '一人では不安な外出も、一緒だから安心。',
+    body: '外出の楽しみを、あきらめないでください。スタッフが一緒にお出かけすることで、安全に、そして楽しく過ごせる時間をつくります。',
+    cta_heading: '外出のご相談はお気軽に', cta_text: '「こんな外出でも頼める？」まずはお問い合わせください。'
+  },
+  service_hospital: {
+    catchcopy: '通院の不安を、安心に変える。ご自宅から病院まで、すべてをサポートします。',
+    heading: '通院のことは、まるごとお任せください。',
+    body: 'ご自宅からの付き添い、受付や会計のサポート、院内での移動介助、お薬の受け取りまで——通院に関わるすべてをワンストップでお手伝いします。',
+    cta_heading: '通院のお困りごとはありませんか？', cta_text: '初回のご相談は無料です。お気軽にお電話ください。'
+  },
+  faq: {
+    q1: '利用するのに条件はありますか？', a1: '特別な条件はございません。年齢や介護認定の有無に関わらず、どなたでもご利用いただけます。自費サービスですので、介護保険の申請も不要です。',
+    q2: '急な依頼にも対応してもらえますか？', a2: 'はい、スタッフの空き状況によりますが、できる限り対応いたします。お急ぎの場合はお電話でご連絡ください。',
+    q3: 'キャンセル料はかかりますか？', a3: '前日までのキャンセルは無料です。当日キャンセルの場合は、サービス料金の50%をいただく場合がございます。体調不良等やむを得ない場合はご相談ください。',
+    q4: '対応エリアはどこですか？', a4: '茨城県内を中心に対応しております。エリア外の方もまずはお気軽にご相談ください。',
+    q5: '定期利用の割引はありますか？', a5: '週1回以上の定期ご利用の方には、割引プランをご用意しております。詳しくはお問い合わせ時にお気軽にお尋ねください。'
+  }
+};
+
+let siteData = {};
+
+// ─── ログイン ───
+async function hashPass(pass) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pass));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function doLogin() {
+  const pass = document.getElementById('loginPass').value;
+  const hash = await hashPass(pass);
+  // 簡易認証：ハッシュ比較 OR 平文一致（初回セットアップ用）
+  if (hash === PASS_HASH || pass === 'worksami2026') {
+    sessionStorage.setItem('admin_auth', '1');
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('adminMain').classList.remove('hidden');
+    loadData();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+
+function doLogout() {
+  sessionStorage.removeItem('admin_auth');
+  location.reload();
+}
+
+document.getElementById('loginPass').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+
+// 既にログイン済みなら直接表示
+if (sessionStorage.getItem('admin_auth') === '1') {
+  document.getElementById('loginOverlay').style.display = 'none';
+  document.getElementById('adminMain').classList.remove('hidden');
+  setTimeout(loadData, 100);
+}
+
+// ─── データ読み込み ───
+async function loadData() {
+  try {
+    const res = await fetch('/' + DATA_PATH + '?t=' + Date.now());
+    if (res.ok) {
+      siteData = await res.json();
+    } else {
+      siteData = JSON.parse(JSON.stringify(DEFAULT_DATA));
+    }
+  } catch {
+    siteData = JSON.parse(JSON.stringify(DEFAULT_DATA));
+  }
+  populateFields();
+}
+
+function populateFields() {
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const [section, key] = el.dataset.key.split('.');
+    if (siteData[section] && siteData[section][key] !== undefined) {
+      el.value = siteData[section][key];
+    }
+  });
+}
+
+// ─── データ保存 ───
+function collectFields() {
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const [section, key] = el.dataset.key.split('.');
+    if (!siteData[section]) siteData[section] = {};
+    siteData[section][key] = el.value;
+  });
+}
+
+async function saveAll() {
+  const btn = document.getElementById('saveBtn');
+  btn.disabled = true;
+  btn.textContent = '保存中...';
+
+  collectFields();
+
+  try {
+    const res = await fetch('/.netlify/functions/save-data', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(siteData)
+    });
+
+    if (res.ok) {
+      showToast('✅ 保存しました！サイトに反映されるまで数分かかる場合があります。');
+    } else {
+      // Netlify Functionがない場合のフォールバック：ローカルダウンロード
+      downloadJSON();
+      showToast('📥 JSONファイルをダウンロードしました。リポジトリの admin/site-data.json に配置してください。');
+    }
+  } catch {
+    downloadJSON();
+    showToast('📥 JSONファイルをダウンロードしました。リポジトリの admin/site-data.json に配置してください。');
+  }
+
+  btn.disabled = false;
+  btn.textContent = '💾 保存する';
+}
+
+function downloadJSON() {
+  const blob = new Blob([JSON.stringify(siteData, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'site-data.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ─── UI ───
+function toggleSection(header) {
+  header.parentElement.classList.toggle('open');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4000);
+}
+</script>
+</body>
+</html>

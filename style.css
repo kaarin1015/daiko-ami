@@ -1,0 +1,177 @@
+/* ═══════════════════════════════════════════
+   Works Ami — Mobile-First / 高齢者向け大きめ文字
+   ═══════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Zen+Maru+Gothic:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;600&display=swap');
+
+:root{
+  --blue:#4a739c;--blue-deep:#34597d;--blue-soft:#7fa3c7;
+  --blue-light:#d6e4f0;--blue-pale:#eef4f9;--blue-wash:#f5f8fb;
+  --pink:#e8c4b8;--pink-deep:#d4a494;--pink-light:#f7ece7;
+  --accent:#c97b5e;--accent-light:#f5ded6;
+  --text:#2d3a4a;--text-mid:#506070;--text-light:#8899a8;
+  --bg:#fdfcfb;--bg-warm:#f9f6f3;--cream:#f3ede7;
+  --white:#fff;--border:#e2e9f0;
+  --radius:16px;--radius-lg:24px;
+  --shadow-sm:0 2px 12px rgba(45,58,74,.05);
+  --shadow-md:0 4px 24px rgba(45,58,74,.07);
+  --transition:.35s cubic-bezier(.25,.46,.45,.94);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:17px}
+body{
+  font-family:'Noto Sans JP',sans-serif;color:var(--text);
+  background:var(--bg);line-height:2;font-weight:400;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+
+/* ═══ HEADER ═══ */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(253,252,251,.92);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(226,233,240,.5);
+  transition:box-shadow var(--transition);
+}
+.header.scrolled{box-shadow:var(--shadow-sm)}
+.header-inner{
+  max-width:1080px;margin:0 auto;display:flex;align-items:center;
+  justify-content:space-between;padding:0 20px;height:56px;
+}
+.logo{
+  font-family:'Shippori Mincho',serif;font-size:1.3rem;font-weight:600;
+  color:var(--blue-deep);letter-spacing:.06em;
+}
+.logo em{font-style:normal;color:var(--accent)}
+.nav-desktop{display:none;gap:24px;align-items:center}
+.nav-desktop a{font-size:.85rem;font-weight:500;color:var(--text-mid);letter-spacing:.04em;transition:color .3s}
+.nav-desktop a:hover,.nav-desktop a.active{color:var(--blue-deep)}
+.nav-cta{
+  background:var(--blue)!important;color:var(--white)!important;
+  padding:10px 22px;border-radius:24px;font-weight:600!important;
+  box-shadow:0 2px 10px rgba(74,115,156,.2);transition:all .3s!important;
+}
+.nav-cta:hover{background:var(--blue-deep)!important;transform:translateY(-1px)}
+.hamburger{
+  display:flex;flex-direction:column;gap:5px;cursor:pointer;
+  padding:6px;background:none;border:none;-webkit-tap-highlight-color:transparent;
+}
+.hamburger span{width:20px;height:1.5px;background:var(--text);border-radius:2px;transition:.3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+.mobile-nav{
+  position:fixed;top:56px;left:0;right:0;bottom:0;
+  background:rgba(253,252,251,.98);backdrop-filter:blur(20px);
+  z-index:99;display:flex;flex-direction:column;padding:32px 24px;gap:4px;
+  transform:translateY(-100%);opacity:0;
+  transition:transform .4s cubic-bezier(.4,0,.2,1),opacity .3s;pointer-events:none;
+}
+.mobile-nav.open{transform:translateY(0);opacity:1;pointer-events:auto}
+.mobile-nav a{
+  font-size:1.05rem;font-weight:500;color:var(--text-mid);
+  padding:16px 0;border-bottom:1px solid var(--border);transition:color .3s;
+}
+.mobile-nav a:last-child{border-bottom:none}
+.mobile-nav a:hover,.mobile-nav a.active{color:var(--blue-deep)}
+
+/* ═══ LAYOUT ═══ */
+.container{max-width:960px;margin:0 auto;padding:0 20px}
+section{padding:64px 0}
+.section-label{
+  font-family:'Shippori Mincho',serif;font-size:.78rem;font-weight:500;
+  color:var(--accent);letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px;
+}
+.section-heading{
+  font-family:'Zen Maru Gothic',sans-serif;font-size:1.45rem;font-weight:500;
+  line-height:1.6;letter-spacing:.04em;margin-bottom:36px;
+}
+.section-heading.centered{text-align:center}
+.section-line{width:32px;height:1.5px;background:var(--accent);margin-bottom:14px}
+.section-line.centered{margin-left:auto;margin-right:auto}
+
+/* ═══ PAGE HERO ═══ */
+.page-hero{
+  padding:100px 0 56px;text-align:center;
+  background:linear-gradient(180deg,var(--blue-pale) 0%,var(--bg) 100%);
+}
+.page-hero .section-line{margin:0 auto 14px}
+.page-hero .section-heading{margin-bottom:12px}
+.page-hero-desc{font-size:.95rem;color:var(--text-light);font-weight:300;line-height:1.9}
+
+/* ═══ BUTTONS ═══ */
+.btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:15px 32px;border-radius:28px;font-size:.95rem;font-weight:600;
+  letter-spacing:.03em;transition:all var(--transition);border:none;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.btn-primary{background:var(--blue);color:var(--white);box-shadow:0 4px 16px rgba(74,115,156,.25)}
+.btn-primary:hover{background:var(--blue-deep);transform:translateY(-2px);box-shadow:0 6px 24px rgba(74,115,156,.3)}
+.btn-outline{background:transparent;color:var(--text-mid);border:1.5px solid var(--border)}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue)}
+.btn-white{background:var(--white);color:var(--blue-deep);box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.btn-white:hover{background:var(--cream);transform:translateY(-2px)}
+.btn-block{width:100%;justify-content:center}
+.btn-sm{padding:12px 24px;font-size:.88rem}
+
+/* ═══ PHOTO ═══ */
+.photo{
+  width:100%;border-radius:var(--radius-lg);overflow:hidden;
+  box-shadow:var(--shadow-sm);position:relative;
+  background:linear-gradient(160deg,var(--blue-pale),var(--cream));
+}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-circle{border-radius:50%}
+
+/* ═══ CTA BAND ═══ */
+.cta-band{
+  background:linear-gradient(135deg,var(--blue),var(--blue-deep));
+  text-align:center;padding:56px 20px;
+}
+.cta-band h2{
+  font-family:'Zen Maru Gothic',sans-serif;font-size:1.25rem;font-weight:500;
+  color:var(--white);margin-bottom:8px;letter-spacing:.04em;
+}
+.cta-band p{color:rgba(255,255,255,.7);font-size:.9rem;margin-bottom:28px;font-weight:300}
+
+/* ═══ FOOTER ═══ */
+.footer{background:var(--text);color:rgba(255,255,255,.45);padding:40px 0 28px}
+.footer-grid{display:grid;grid-template-columns:1fr;gap:28px;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer-brand .logo{color:rgba(255,255,255,.75);margin-bottom:8px}
+.footer-brand p{font-size:.8rem;line-height:1.9}
+.footer-links h4{font-family:'Shippori Mincho',serif;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:12px}
+.footer-links a{display:block;font-size:.82rem;color:rgba(255,255,255,.4);margin-bottom:8px;transition:color .3s}
+.footer-links a:hover{color:rgba(255,255,255,.8)}
+.footer-copy{font-size:.72rem;letter-spacing:.04em;text-align:center}
+
+/* ═══ REVEAL ═══ */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94)}
+.rv.visible{opacity:1;transform:translateY(0)}
+.rv-d1{transition-delay:.08s}.rv-d2{transition-delay:.16s}
+.rv-d3{transition-delay:.24s}.rv-d4{transition-delay:.32s}
+
+/* ═══ UTILITY ═══ */
+.text-center{text-align:center}
+.mt-24{margin-top:24px}.mt-32{margin-top:32px}
+
+/* ═══ TABLET 600px+ ═══ */
+@media(min-width:600px){
+  .header-inner{height:64px;padding:0 32px}
+  section{padding:80px 0}
+  .container{padding:0 32px}
+  .section-heading{font-size:1.6rem}
+  .page-hero{padding:120px 0 64px}
+  .footer-grid{grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+}
+/* ═══ DESKTOP 900px+ ═══ */
+@media(min-width:900px){
+  html{font-size:18px}
+  .header-inner{height:72px}
+  .hamburger{display:none}
+  .nav-desktop{display:flex}
+  section{padding:100px 0}
+  .section-heading{font-size:1.65rem;margin-bottom:48px}
+}

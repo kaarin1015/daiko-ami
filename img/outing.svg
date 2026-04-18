@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d6e4f0"/><stop offset="100%" stop-color="#eef4f9"/></linearGradient></defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <!-- Ground -->
+  <ellipse cx="400" cy="520" rx="350" ry="60" fill="#c5d9a5" opacity=".25"/>
+  <!-- Trees -->
+  <g transform="translate(120,200)" opacity=".3"><circle cx="40" cy="0" r="50" fill="#7fa3c7"/><rect x="35" y="50" width="10" height="80" fill="#8899a8"/></g>
+  <g transform="translate(600,220)" opacity=".25"><circle cx="35" cy="0" r="45" fill="#7fa3c7"/><rect x="30" y="45" width="10" height="70" fill="#8899a8"/></g>
+  <!-- Two people walking -->
+  <g transform="translate(300,230)">
+    <!-- Staff -->
+    <circle cx="60" cy="30" r="28" fill="#f5d5c8"/>
+    <path d="M30,70 Q30,58 60,58 Q90,58 90,70 L95,190 Q95,205 60,205 Q25,205 25,190Z" fill="#4a739c" opacity=".7"/>
+    <circle cx="50" cy="28" r="2.5" fill="#506070"/><circle cx="70" cy="28" r="2.5" fill="#506070"/>
+    <path d="M50,38 Q60,46 70,38" stroke="#c97b5e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <!-- Legs -->
+    <line x1="45" y1="205" x2="40" y2="270" stroke="#506070" stroke-width="3" stroke-linecap="round" opacity=".4"/>
+    <line x1="75" y1="205" x2="82" y2="270" stroke="#506070" stroke-width="3" stroke-linecap="round" opacity=".4"/>
+  </g>
+  <g transform="translate(420,240)">
+    <!-- Elder -->
+    <circle cx="50" cy="30" r="25" fill="#e8c4b8"/>
+    <path d="M22,65 Q22,55 50,55 Q78,55 78,65 L82,180 Q82,195 50,195 Q18,195 18,180Z" fill="#c97b5e" opacity=".3"/>
+    <circle cx="42" cy="28" r="2" fill="#506070"/><circle cx="58" cy="28" r="2" fill="#506070"/>
+    <path d="M42,38 Q50,44 58,38" stroke="#c97b5e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <line x1="82" y1="140" x2="98" y2="200" stroke="#8899a8" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="38" y1="195" x2="34" y2="260" stroke="#506070" stroke-width="3" stroke-linecap="round" opacity=".4"/>
+    <line x1="62" y1="195" x2="68" y2="260" stroke="#506070" stroke-width="3" stroke-linecap="round" opacity=".4"/>
+  </g>
+  <!-- Sun -->
+  <circle cx="650" cy="100" r="40" fill="#c97b5e" opacity=".12"/>
+  <circle cx="650" cy="100" r="25" fill="#c97b5e" opacity=".08"/>
+</svg>

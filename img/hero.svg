@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+  <defs>
+    <radialGradient id="bg1" cx="50%" cy="45%" r="55%"><stop offset="0%" stop-color="#f7ece7"/><stop offset="100%" stop-color="#eef4f9"/></radialGradient>
+    <linearGradient id="skin1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f5d5c8"/><stop offset="100%" stop-color="#e8bfb0"/></linearGradient>
+    <linearGradient id="skin2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fce4da"/><stop offset="100%" stop-color="#f5d5c8"/></linearGradient>
+  </defs>
+  <rect width="800" height="800" fill="url(#bg1)"/>
+  <!-- Decorative circles -->
+  <circle cx="200" cy="200" r="120" fill="#d6e4f0" opacity=".3"/>
+  <circle cx="620" cy="600" r="100" fill="#f7ece7" opacity=".5"/>
+  <circle cx="400" cy="400" r="180" fill="#eef4f9" opacity=".4"/>
+  <!-- Elderly hand -->
+  <g transform="translate(250,280) rotate(-8)">
+    <path d="M0,120 Q10,60 50,30 Q80,10 120,20 Q150,30 170,60 Q180,80 180,120 Q178,160 160,190 Q130,220 80,230 Q30,225 10,190 Q-5,160 0,120Z" fill="url(#skin1)" stroke="#d4a494" stroke-width="1.5"/>
+    <path d="M50,30 Q55,70 60,110" stroke="#d4a494" stroke-width="1" fill="none" opacity=".3"/>
+    <path d="M120,20 Q115,60 115,110" stroke="#d4a494" stroke-width="1" fill="none" opacity=".3"/>
+  </g>
+  <!-- Young helper hand -->
+  <g transform="translate(300,260) rotate(5)">
+    <path d="M60,100 Q70,40 110,15 Q140,0 175,10 Q200,20 220,50 Q230,75 225,110 Q220,150 200,175 Q170,205 130,210 Q85,208 65,180 Q50,155 55,120Z" fill="url(#skin2)" stroke="#e8c4b8" stroke-width="1.5"/>
+    <path d="M110,15 Q112,55 115,100" stroke="#e8c4b8" stroke-width="1" fill="none" opacity=".3"/>
+    <path d="M175,10 Q170,50 168,95" stroke="#e8c4b8" stroke-width="1" fill="none" opacity=".3"/>
+  </g>
+  <!-- Heart -->
+  <g transform="translate(380,220) scale(.6)">
+    <path d="M50,30 Q50,0 80,0 Q110,0 110,30 Q110,0 140,0 Q170,0 170,30 Q170,70 110,110 Q50,70 50,30Z" fill="#c97b5e" opacity=".15"/>
+  </g>
+  <!-- Sparkles -->
+  <circle cx="280" cy="220" r="4" fill="#c97b5e" opacity=".4"/>
+  <circle cx="520" cy="320" r="3" fill="#4a739c" opacity=".3"/>
+  <circle cx="340" cy="510" r="5" fill="#c97b5e" opacity=".25"/>
+  <!-- Flower decorations -->
+  <g transform="translate(150,500)" opacity=".25">
+    <circle cx="0" cy="0" r="12" fill="#c97b5e"/>
+    <circle cx="0" cy="-18" r="8" fill="#e8c4b8"/><circle cx="17" cy="-6" r="8" fill="#e8c4b8"/>
+    <circle cx="11" cy="15" r="8" fill="#e8c4b8"/><circle cx="-11" cy="15" r="8" fill="#e8c4b8"/>
+    <circle cx="-17" cy="-6" r="8" fill="#e8c4b8"/>
+  </g>
+  <g transform="translate(600,250)" opacity=".2">
+    <circle cx="0" cy="0" r="10" fill="#4a739c"/>
+    <circle cx="0" cy="-15" r="7" fill="#7fa3c7"/><circle cx="14" cy="-5" r="7" fill="#7fa3c7"/>
+    <circle cx="9" cy="12" r="7" fill="#7fa3c7"/><circle cx="-9" cy="12" r="7" fill="#7fa3c7"/>
+    <circle cx="-14" cy="-5" r="7" fill="#7fa3c7"/>
+  </g>
+</svg>

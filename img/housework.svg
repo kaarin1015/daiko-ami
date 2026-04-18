@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#f7ece7"/>
+  <circle cx="400" cy="300" r="200" fill="#fff" opacity=".4"/>
+  <!-- House -->
+  <g transform="translate(240,100)">
+    <path d="M160,80 L20,200 L300,200Z" fill="#4a739c" opacity=".12"/>
+    <rect x="60" y="200" width="200" height="220" rx="4" fill="#fff" opacity=".7"/>
+    <rect x="60" y="200" width="200" height="220" rx="4" stroke="#4a739c" stroke-width="1.5" fill="none" opacity=".3"/>
+    <!-- Window -->
+    <rect x="90" y="240" width="60" height="50" rx="4" fill="#d6e4f0" opacity=".6"/>
+    <line x1="120" y1="240" x2="120" y2="290" stroke="#4a739c" stroke-width="1" opacity=".2"/>
+    <line x1="90" y1="265" x2="150" y2="265" stroke="#4a739c" stroke-width="1" opacity=".2"/>
+    <!-- Door -->
+    <rect x="180" y="300" width="50" height="120" rx="4" fill="#e8c4b8" opacity=".5"/>
+    <circle cx="220" cy="365" r="4" fill="#c97b5e" opacity=".5"/>
+  </g>
+  <!-- Sparkle / clean shine -->
+  <g transform="translate(500,200)" opacity=".4">
+    <line x1="0" y1="-20" x2="0" y2="20" stroke="#4a739c" stroke-width="2" stroke-linecap="round"/>
+    <line x1="-20" y1="0" x2="20" y2="0" stroke="#4a739c" stroke-width="2" stroke-linecap="round"/>
+    <line x1="-14" y1="-14" x2="14" y2="14" stroke="#4a739c" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="14" y1="-14" x2="-14" y2="14" stroke="#4a739c" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(180,350)" opacity=".3">
+    <line x1="0" y1="-12" x2="0" y2="12" stroke="#c97b5e" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="-12" y1="0" x2="12" y2="0" stroke="#c97b5e" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+</svg>

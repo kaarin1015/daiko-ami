@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#eef4f9"/>
+  <circle cx="400" cy="300" r="220" fill="#d6e4f0" opacity=".2"/>
+  <!-- Shopping bag -->
+  <g transform="translate(280,120)">
+    <rect x="0" y="80" width="240" height="280" rx="20" fill="#4a739c" opacity=".15"/>
+    <rect x="10" y="90" width="220" height="260" rx="16" fill="#fff" opacity=".8"/>
+    <path d="M80,80 Q80,30 120,30 Q160,30 160,80" stroke="#4a739c" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Items in bag -->
+    <circle cx="80" cy="200" r="30" fill="#e8c4b8" opacity=".6"/>
+    <rect x="130" y="175" width="50" height="55" rx="8" fill="#7fa3c7" opacity=".5"/>
+    <circle cx="100" cy="280" r="25" fill="#c97b5e" opacity=".3"/>
+    <rect x="140" y="260" width="45" height="45" rx="6" fill="#d6e4f0" opacity=".6"/>
+  </g>
+  <!-- Sparkles -->
+  <circle cx="200" cy="200" r="6" fill="#c97b5e" opacity=".3"/>
+  <circle cx="600" cy="150" r="4" fill="#4a739c" opacity=".3"/>
+  <circle cx="550" cy="400" r="5" fill="#c97b5e" opacity=".25"/>
+  <!-- Check mark -->
+  <g transform="translate(520,280)"><circle cx="30" cy="30" r="30" fill="#4a739c" opacity=".12"/><polyline points="18,30 27,39 42,22" stroke="#4a739c" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+</svg>
