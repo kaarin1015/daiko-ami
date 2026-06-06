@@ -11,4 +11,4 @@
 [[headers]]
   for = "/admin/*"
   [headers.values]
-    Content-Security-Policy = "script-src 'self' 'unsafe-eval' https://identity.netlify.com"
+    Content-Security-Policy = "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://identity.netlify.com https://unpkg.com;"
